@@ -15,5 +15,5 @@ Tugas membuat sebuah aplikasi perhitungan umur menggunakan java netbeans
 4. Mengubah peristiwa yang ditampilkan dari yang awalnya berbahasa Inggris menjadi berbahasa Indonesia.
 
 ### Error :
-1. Pada peristiwa terdapat huruf "+" di samping setiap kata baru yang muncul, bug belum bisa diperbaiki :(.
-2. Hanya beberapa peristiwa saja yang bisa ditranslate ke bahasa Indonesia.
+1. Pada peristiwa terdapat huruf "+" di samping setiap kata baru yang muncul. (Bug Fixed)
+2. Hanya beberapa peristiwa saja yang bisa ditranslate ke bahasa Indonesia. (Bug Fixed)
