@@ -16,3 +16,4 @@ Tugas membuat sebuah aplikasi perhitungan umur menggunakan java netbeans
 
 ### Error :
 1. Pada peristiwa terdapat huruf "+" di samping setiap kata baru yang muncul, bug belum bisa diperbaiki :(.
+2. Hanya beberapa peristiwa saja yang bisa ditranslate ke bahasa Indonesia.
