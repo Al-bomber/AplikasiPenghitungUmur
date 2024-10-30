@@ -11,6 +11,8 @@ import org.json.JSONObject;
 import javax.swing.JTextArea;
 import java.io.UnsupportedEncodingException;
 import java.util.function.Supplier;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 
 
@@ -88,7 +90,6 @@ public class PenghitungUmurHelper {
                 
                 javax.swing.SwingUtilities.invokeLater(() ->
                 txtAreaPeristiwa.append(peristiwa + "\n"));
-                txtAreaPeristiwa.append(year + ": " + description + "\n");
             }
         } catch (Exception e) {
             txtAreaPeristiwa.setText("Gagal mendapatkan data peristiwa.");
@@ -97,22 +98,27 @@ public class PenghitungUmurHelper {
     
     public String translateToIndonesian(String text) {
         try {
-            String urlString = "https://lingva.ml/api/v1/en/id/" + URLEncoder.encode(text, "UTF-8");
+            String encodedText = URLEncoder.encode(text, StandardCharsets.UTF_8.toString());
+            String urlString = "https://lingva.ml/api/v1/en/id/" + encodedText;
             URL url = new URL(urlString);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
+            Thread.sleep(2000);
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
-            StringBuilder content = new StringBuilder();
-            String inputLine;
-            while ((inputLine = in.readLine()) != null) {
-                content.append(inputLine);
+            StringBuilder content;
+            try (BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"))) {
+                content = new StringBuilder();
+                String inputLine;
+                while ((inputLine = in.readLine()) != null) {
+                    content.append(inputLine);
+                }
             }
-            in.close();
             conn.disconnect();
 
             JSONObject json = new JSONObject(content.toString());
-            return json.getString("translation");
+            String translation = json.getString("translation");
+            
+            return translation.replace("+", " ");
         } catch (Exception e) {
             return text + " (Gagal diterjemahkan)";
         }
